@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Carro con funcionamiento solar</title>
+
+<meta
+name="description"
+content="Carro con funcionamiento solar — proyecto de movilidad sostenible y energía renovable."
+>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#050505;
+    color:#f5f5f5;
+    overflow-x:hidden;
+    transition:.4s;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    height:72px;
+
+    padding:0 6%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    z-index:1000;
+
+    background:rgba(5,5,5,.72);
+
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:18px;
+
+    font-weight:800;
+
+}
+
+.logo-sun{
+
+    color:#ffd43b;
+
+    font-size:25px;
+
+}
+
+nav{
+
+    display:flex;
+
+    gap:32px;
+
+}
+
+nav a{
+
+    color:#aaa;
+
+    font-size:13px;
+
+    transition:.3s;
+
+}
+
+nav a:hover{
+
+    color:#fff;
+
+}
+
+.theme-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:1px solid #333;
+
+    background:#111;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    min-height:100vh;
+
+    padding:140px 7% 80px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    gap:60px;
+
+}
+
+.eyebrow{
+
+    color:#ffd43b;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+
+    margin-bottom:22px;
+
+}
+
+.hero h1{
+
+    font-size:clamp(55px,7vw,105px);
+
+    line-height:.92;
+
+    letter-spacing:-6px;
+
+    margin-bottom:30px;
+
+}
+
+.hero h1 span{
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #ffd43b
+    );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+}
+
+.hero p{
+
+    color:#999;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    max-width:600px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.btn{
+
+    display:inline-block;
+
+    padding:16px 25px;
+
+    border-radius:40px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.primary{
+
+    background:#fff;
+
+    color:#000;
+
+}
+
+.primary:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 40px rgba(255,255,255,.15);
+
+}
+
+.secondary{
+
+    border:1px solid #333;
+
+    color:#fff;
+
+}
+
+.secondary:hover{
+
+    background:#151515;
+
+}
+
+.hero-stats{
+
+    display:flex;
+
+    gap:35px;
+
+    margin-top:50px;
+
+}
+
+.hero-stats div{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.hero-stats strong{
+
+    font-size:25px;
+
+}
+
+.hero-stats span{
+
+    font-size:11px;
+
+    color:#666;
+
+}
+
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image{
+
+    position:relative;
+
+}
+
+.hero-image img{
+
+    width:100%;
+
+    height:570px;
+
+    object-fit:cover;
+
+    border-radius:30px;
+
+    box-shadow:
+
+        0 30px 100px rgba(0,0,0,.7);
+
+}
+
+.sun-glow{
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    background:#ffd43b;
+
+    filter:blur(130px);
+
+    opacity:.15;
+
+    right:-70px;
+
+    top:-80px;
+
+}
+
+.floating-card{
+
+    position:absolute;
+
+    bottom:30px;
+
+    left:30px;
+
+    padding:18px 22px;
+
+    background:rgba(5,5,5,.82);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:15px;
+
+    font-size:12px;
+
+}
+
+.floating-card strong{
+
+    display:block;
+
+    font-size:23px;
+
+    margin-top:5px;
+
+    color:#58d68d;
+
+}
+
+.pulse{
+
+    display:inline-block;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#58d68d;
+
+    box-shadow:0 0 15px #58d68d;
+
+    margin-right:7px;
+
+}
+
+
+/* =====================================================
+   GENERAL SECTIONS
+===================================================== */
+
+section{
+
+    padding:140px 7%;
+
+}
+
+.section-label{
+
+    color:#ffd43b;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+.intro{
+
+    max-width:1100px;
+
+}
+
+.intro h2,
+.section-heading h2,
+.video-section h2,
+.limitations h2{
+
+    font-size:clamp(42px,6vw,75px);
+
+    line-height:1;
+
+    letter-spacing:-4px;
+
+}
+
+.intro p{
+
+    color:#888;
+
+    max-width:760px;
+
+    line-height:1.8;
+
+    margin-top:35px;
+
+    font-size:18px;
+
+}
+
+
+/* =====================================================
+   FUNCTION
+===================================================== */
+
+.function-section{
+
+    background:#090909;
+
+}
+
+.section-heading{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:end;
+
+    gap:50px;
+
+    margin-bottom:60px;
+
+}
+
+.section-heading p{
+
+    max-width:400px;
+
+    color:#777;
+
+    line-height:1.7;
+
+}
+
+.steps{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+
+}
+
+.step-card{
+
+    padding:35px 28px;
+
+    background:#101010;
+
+    border:1px solid #222;
+
+    border-radius:20px;
+
+    transition:.4s;
+
+}
+
+.step-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#555;
+
+}
+
+.step-number{
+
+    color:#555;
+
+    font-size:12px;
+
+}
+
+.step-icon{
+
+    font-size:36px;
+
+    margin:35px 0 20px;
+
+}
+
+.step-card h3{
+
+    margin-bottom:12px;
+
+}
+
+.step-card p{
+
+    color:#777;
+
+    line-height:1.7;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   SIMULATOR
+===================================================== */
+
+.interactive-car{
+
+    margin-top:80px;
+
+    padding:40px;
+
+    background:linear-gradient(
+        145deg,
+        #151515,
+        #080808
+    );
+
+    border:1px solid #222;
+
+    border-radius:30px;
+
+}
+
+.diagram-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:50px;
+
+}
+
+.diagram-title span{
+
+    color:#666;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+}
+
+.energy-flow{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.energy-item{
+
+    text-align:center;
+
+}
+
+.energy-icon{
+
+    font-size:38px;
+
+    margin-bottom:12px;
+
+}
+
+.energy-item strong{
+
+    display:block;
+
+    font-size:14px;
+
+}
+
+.energy-item small{
+
+    color:#666;
+
+}
+
+.arrow{
+
+    font-size:30px;
+
+    color:#ffd43b;
+
+    animation:arrowPulse 1.5s infinite;
+
+}
+
+@keyframes arrowPulse{
+
+    50%{
+
+        opacity:.25;
+
+    }
+
+}
+
+.simulation-btn{
+
+    display:block;
+
+    margin:45px auto 20px;
+
+    padding:15px 28px;
+
+    border:0;
+
+    border-radius:30px;
+
+    background:#ffd43b;
+
+    color:#111;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.simulation-bar{
+
+    height:6px;
+
+    background:#222;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+#energyProgress{
+
+    height:100%;
+
+    width:0;
+
+    background:#ffd43b;
+
+    transition:3s;
+
+}
+
+#simulationText{
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:12px;
+
+    margin-top:15px;
+
+}
+
+
+/* =====================================================
+   VIDEO
+===================================================== */
+
+.video-section{
+
+    text-align:center;
+
+}
+
+.video-section > p{
+
+    max-width:650px;
+
+    margin:25px auto 45px;
+
+    color:#777;
+
+    line-height:1.7;
+
+}
+
+.video-container{
+
+    max-width:1000px;
+
+    height:560px;
+
+    margin:auto;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:#000;
+
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+
+}
+
+.video-container iframe{
+
+    width:100%;
+
+    height:100%;
+
+    border:0;
+
+}
+
+
+/* =====================================================
+   BENEFITS
+===================================================== */
+
+.benefits-section{
+
+    background:#080808;
+
+}
+
+.benefits-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+
+    margin-top:60px;
+
+}
+
+.benefit{
+
+    padding:35px;
+
+    border:1px solid #222;
+
+    border-radius:20px;
+
+    transition:.3s;
+
+}
+
+.benefit:hover{
+
+    transform:translateY(-6px);
+
+    background:#111;
+
+}
+
+.benefit span{
+
+    font-size:35px;
+
+}
+
+.benefit h3{
+
+    margin:25px 0 12px;
+
+}
+
+.benefit p{
+
+    color:#777;
+
+    line-height:1.7;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   HUMANITY
+===================================================== */
+
+.humanity{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    gap:60px;
+
+}
+
+.humanity h2{
+
+    font-size:clamp(45px,6vw,80px);
+
+    line-height:.95;
+
+    letter-spacing:-5px;
+
+}
+
+.humanity p{
+
+    color:#777;
+
+    line-height:1.8;
+
+    max-width:600px;
+
+    margin:30px 0;
+
+}
+
+.impact-list{
+
+    max-width:550px;
+
+}
+
+.impact-list div{
+
+    display:flex;
+
+    gap:20px;
+
+    padding:18px 0;
+
+    border-bottom:1px solid #222;
+
+}
+
+.impact-list strong{
+
+    color:#ffd43b;
+
+}
+
+.impact-list span{
+
+    color:#aaa;
+
+}
+
+.planet{
+
+    display:grid;
+
+    place-items:center;
+
+}
+
+.planet-circle{
+
+    width:340px;
+
+    height:340px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:145px;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 25%,
+            #3f9147,
+            #051106
+        );
+
+    box-shadow:
+
+        0 0 100px rgba(
+            255,
+            212,
+            59,
+            .08
+        );
+
+    animation:planetFloat 5s ease-in-out infinite;
+
+}
+
+@keyframes planetFloat{
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+}
+
+
+/* =====================================================
+   CHALLENGES
+===================================================== */
+
+.challenge-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin-top:60px;
+
+}
+
+.challenge-grid div{
+
+    border-top:1px solid #333;
+
+    padding-top:25px;
+
+}
+
+.challenge-grid span{
+
+    color:#ffd43b;
+
+    font-size:12px;
+
+}
+
+.challenge-grid h3{
+
+    margin:25px 0 12px;
+
+}
+
+.challenge-grid p{
+
+    color:#777;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+}
+
+
+/* =====================================================
+   FUTURE
+===================================================== */
+
+.future{
+
+    min-height:700px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:
+
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(255,212,59,.12),
+            transparent 30%
+        );
+
+}
+
+.future h2{
+
+    font-size:clamp(50px,8vw,110px);
+
+    line-height:.9;
+
+    letter-spacing:-6px;
+
+}
+
+.future p{
+
+    color:#777;
+
+    max-width:550px;
+
+    line-height:1.8;
+
+    margin:35px 0;
+
+}
+
+.future-number{
+
+    font-size:15vw;
+
+    font-weight:900;
+
+    color:#111;
+
+    letter-spacing:-10px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    padding:70px 7%;
+
+    background:#020202;
+
+}
+
+.footer-logo{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+footer p{
+
+    color:#666;
+
+    margin:15px 0;
+
+}
+
+.footer-line{
+
+    height:1px;
+
+    background:#222;
+
+    margin:40px 0 20px;
+
+}
+
+footer small{
+
+    color:#444;
+
+}
+
+
+/* =====================================================
+   SCROLL ANIMATION
+===================================================== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+
+        opacity .8s ease,
+
+        transform .8s ease;
+
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+body.light{
+
+    background:#f5f5f5;
+
+    color:#111;
+
+}
+
+body.light .navbar{
+
+    background:rgba(255,255,255,.8);
+
+    border-color:#ddd;
+
+}
+
+body.light nav a{
+
+    color:#555;
+
+}
+
+body.light .theme-btn{
+
+    background:#fff;
+
+    color:#111;
+
+    border-color:#ddd;
+
+}
+
+body.light .function-section,
+body.light .benefits-section{
+
+    background:#eaeaea;
+
+}
+
+body.light .step-card,
+body.light .benefit{
+
+    background:#fff;
+
+    border-color:#ddd;
+
+}
+
+body.light .interactive-car{
+
+    background:#fff;
+
+    border-color:#ddd;
+
+}
+
+body.light .secondary{
+
+    color:#111;
+
+    border-color:#bbb;
+
+}
+
+body.light .future-number{
+
+    color:#ddd;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    nav{
+
+        display:none;
+
+    }
+
+    .hero,
+    .humanity{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .steps,
+    .benefits-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .challenge-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .section-heading{
+
+        display:block;
+
+    }
+
+    .section-heading p{
+
+        margin-top:20px;
+
+    }
+
+    .future{
+
+        display:block;
+
+    }
+
+    .future-number{
+
+        margin-top:80px;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero{
+
+        padding-left:5%;
+
+        padding-right:5%;
+
+    }
+
+    section{
+
+        padding:90px 5%;
+
+    }
+
+    .hero h1{
+
+        font-size:52px;
+
+        letter-spacing:-3px;
+
+    }
+
+    .hero-image img{
+
+        height:350px;
+
+    }
+
+    .steps,
+    .benefits-grid,
+    .challenge-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .energy-flow{
+
+        flex-direction:column;
+
+        gap:20px;
+
+    }
+
+    .arrow{
+
+        transform:rotate(90deg);
+
+    }
+
+    .video-container{
+
+        height:350px;
+
+    }
+
+    .planet-circle{
+
+        width:260px;
+
+        height:260px;
+
+        font-size:110px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+<a href="#inicio" class="logo">
+
+<span class="logo-sun">☀</span>
+
+SolarDrive
+
+</a>
+
+
+<nav>
+
+<a href="#inicio">
+Inicio
+</a>
+
+<a href="#funcionamiento">
+Funcionamiento
+</a>
+
+<a href="#beneficios">
+Beneficios
+</a>
+
+<a href="#futuro">
+Futuro
+</a>
+
+</nav>
+
+
+<button
+id="themeBtn"
+class="theme-btn"
+>
+☾
+</button>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section id="inicio" class="hero">
+
+
+<div class="hero-text reveal">
+
+<div class="eyebrow">
+⚡ MOVILIDAD DEL FUTURO
+</div>
+
+
+<h1>
+
+Carro con
+<br>
+
+<span>
+funcionamiento solar.
+</span>
+
+</h1>
+
+
+<p>
+
+Una propuesta de movilidad sostenible que
+aprovecha la energía del Sol para producir
+electricidad y alimentar un sistema de
+propulsión eléctrico.
+
+</p>
+
+
+<div class="hero-buttons">
+
+<a
+href="#funcionamiento"
+class="btn primary"
+>
+
+Descubrir cómo funciona →
+
+</a>
+
+
+<a
+href="#beneficios"
+class="btn secondary"
+>
+
+Ver beneficios
+
+</a>
+
+</div>
+
+
+<div class="hero-stats">
+
+<div>
+
+<strong>☀</strong>
+
+<span>
+Energía solar
+</span>
+
+</div>
+
+
+<div>
+
+<strong>⚡</strong>
+
+<span>
+Energía eléctrica
+</span>
+
+</div>
+
+
+<div>
+
+<strong>🌱</strong>
+
+<span>
+Movilidad sostenible
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="hero-image reveal">
+
+<div class="sun-glow"></div>
+
+
+<!-- IMAGEN AUTOMÁTICA -->
+
+<img
+src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1600&q=90"
+alt="Automóvil representando movilidad sostenible"
+>
+
+
+<div class="floating-card">
+
+<span class="pulse"></span>
+
+Sistema solar
+
+<strong>
+ACTIVO
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="intro reveal">
+
+<div class="section-label">
+01 — LA IDEA
+</div>
+
+
+<h2>
+
+Una nueva forma de entender
+<br>
+la movilidad.
+
+</h2>
+
+
+<p>
+
+Un carro solar utiliza paneles fotovoltaicos
+para captar la radiación del Sol y convertirla
+en electricidad.
+
+Esta energía puede alimentar un motor eléctrico
+y, dependiendo del diseño, almacenarse en baterías.
+
+</p>
+
+</section>
+
+
+
+<!-- =====================================================
+     FUNCIONAMIENTO
+===================================================== -->
+
+<section
+id="funcionamiento"
+class="function-section"
+>
+
+
+<div class="section-label reveal">
+02 — FUNCIONAMIENTO
+</div>
+
+
+<div class="section-heading reveal">
+
+<h2>
+Del Sol al movimiento.
+</h2>
+
+<p>
+
+El sistema combina energía solar,
+electrónica, almacenamiento y
+propulsión eléctrica.
+
+</p>
+
+</div>
+
+
+
+<div class="steps">
+
+
+<article class="step-card reveal">
+
+<span class="step-number">
+01
+</span>
+
+<div class="step-icon">
+☀️
+</div>
+
+<h3>
+Captación
+</h3>
+
+<p>
+
+Los paneles solares reciben
+la radiación solar y producen
+electricidad mediante el efecto
+fotovoltaico.
+
+</p>
+
+</article>
+
+
+
+<article class="step-card reveal">
+
+<span class="step-number">
+02
+</span>
+
+<div class="step-icon">
+⚡
+</div>
+
+<h3>
+Conversión
+</h3>
+
+<p>
+
+La energía generada es regulada
+para que pueda utilizarse de
+manera adecuada por el sistema.
+
+</p>
+
+</article>
+
+
+
+<article class="step-card reveal">
+
+<span class="step-number">
+03
+</span>
+
+<div class="step-icon">
+🔋
+</div>
+
+<h3>
+Almacenamiento
+</h3>
+
+<p>
+
+Una batería puede almacenar
+parte de la energía para
+utilizarla posteriormente.
+
+</p>
+
+</article>
+
+
+
+<article class="step-card reveal">
+
+<span class="step-number">
+04
+</span>
+
+<div class="step-icon">
+🚗
+</div>
+
+<h3>
+Movimiento
+</h3>
+
+<p>
+
+El motor eléctrico utiliza
+la energía disponible para
+impulsar las ruedas.
+
+</p>
+
+</article>
+
+</div>
+
+
+
+<!-- =====================================================
+     SIMULADOR
+===================================================== -->
+
+<div class="interactive-car reveal">
+
+
+<div class="diagram-title">
+
+<span>
+SIMULACIÓN DEL SISTEMA
+</span>
+
+<strong>
+Flujo energético
+</strong>
+
+</div>
+
+
+<div class="energy-flow">
+
+
+<div class="energy-item">
+
+<div class="energy-icon">
+☀️
+</div>
+
+<strong>
+Sol
+</strong>
+
+<small>
+Radiación
+</small>
+
+</div>
+
+
+<div class="arrow">
+→
+</div>
+
+
+<div class="energy-item">
+
+<div class="energy-icon">
+▦
+</div>
+
+<strong>
+Panel solar
+</strong>
+
+<small>
+Captación
+</small>
+
+</div>
+
+
+<div class="arrow">
+→
+</div>
+
+
+<div class="energy-item">
+
+<div class="energy-icon">
+🔋
+</div>
+
+<strong>
+Batería
+</strong>
+
+<small>
+Almacenamiento
+</small>
+
+</div>
+
+
+<div class="arrow">
+→
+</div>
+
+
+<div class="energy-item">
+
+<div class="energy-icon">
+⚙️
+</div>
+
+<strong>
+Motor
+</strong>
+
+<small>
+Movimiento
+</small>
+
+</div>
+
+</div>
+
+
+
+<button
+id="startSimulation"
+class="simulation-btn"
+>
+
+▶ Iniciar simulación
+
+</button>
+
+
+<div class="simulation-bar">
+
+<div id="energyProgress">
+</div>
+
+</div>
+
+
+<p id="simulationText">
+
+Presiona el botón para observar
+el flujo de energía.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VIDEO
+===================================================== -->
+
+<section class="video-section reveal">
+
+
+<div class="section-label">
+03 — VIDEO
+</div>
+
+
+<h2>
+
+¿Cómo funciona un carro solar?
+
+</h2>
+
+
+<p>
+
+Mira una explicación visual del funcionamiento
+de los paneles fotovoltaicos y su aplicación
+en vehículos solares.
+
+</p>
+
+
+<div class="video-container">
+
+
+<iframe
+
+src="https://www.youtube.com/embed/uTu2peIrM3k"
+
+title="Cómo funciona un carro solar"
+
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+
+allowfullscreen>
+
+</iframe>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BENEFICIOS
+===================================================== -->
+
+<section
+id="beneficios"
+class="benefits-section"
+>
+
+
+<div class="section-label reveal">
+
+04 — IMPACTO
+
+</div>
+
+
+<div class="section-heading reveal">
+
+<h2>
+Más que un automóvil.
+</h2>
+
+<p>
+
+La tecnología solar aplicada
+al transporte puede contribuir
+a investigar nuevas formas
+de movilidad.
+
+</p>
+
+</div>
+
+
+
+<div class="benefits-grid">
+
+
+<article class="benefit reveal">
+
+<span>
+🌱
+</span>
+
+<h3>
+Menos emisiones directas
+</h3>
+
+<p>
+
+Un vehículo eléctrico no produce
+emisiones de escape durante
+su funcionamiento.
+
+</p>
+
+</article>
+
+
+
+<article class="benefit reveal">
+
+<span>
+☀️
+</span>
+
+<h3>
+Energía renovable
+</h3>
+
+<p>
+
+Utiliza la radiación solar como
+fuente para generar electricidad.
+
+</p>
+
+</article>
+
+
+
+<article class="benefit reveal">
+
+<span>
+🔋
+</span>
+
+<h3>
+Almacenamiento
+</h3>
+
+<p>
+
+Las baterías permiten conservar
+energía para utilizarla
+posteriormente.
+
+</p>
+
+</article>
+
+
+
+<article class="benefit reveal">
+
+<span>
+🌎
+</span>
+
+<h3>
+Movilidad sostenible
+</h3>
+
+<p>
+
+Forma parte de la investigación
+de alternativas al transporte
+convencional.
+
+</p>
+
+</article>
+
+
+
+<article class="benefit reveal">
+
+<span>
+💡
+</span>
+
+<h3>
+Innovación
+</h3>
+
+<p>
+
+Combina electrónica, energía
+solar, ingeniería y diseño.
+
+</p>
+
+</article>
+
+
+
+<article class="benefit reveal">
+
+<span>
+🚀
+</span>
+
+<h3>
+Educación
+</h3>
+
+<p>
+
+Permite estudiar de forma
+práctica diferentes principios
+científicos.
+
+</p>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HUMANIDAD
+===================================================== -->
+
+<section class="humanity reveal">
+
+
+<div>
+
+<div class="section-label">
+
+05 — CONTRIBUCIÓN A LA HUMANIDAD
+
+</div>
+
+
+<h2>
+
+Tecnología para
+<br>
+un futuro sostenible.
+
+</h2>
+
+
+<p>
+
+El desarrollo de vehículos solares
+forma parte de una búsqueda tecnológica
+más amplia: encontrar sistemas de transporte
+que aprovechen mejor las fuentes de
+energía renovables.
+
+</p>
+
+
+<div class="impact-list">
+
+
+<div>
+
+<strong>
+01
+</strong>
+
+<span>
+Transición energética
+</span>
+
+</div>
+
+
+<div>
+
+<strong>
+02
+</strong>
+
+<span>
+Innovación tecnológica
+</span>
+
+</div>
+
+
+<div>
+
+<strong>
+03
+</strong>
+
+<span>
+Investigación científica
+</span>
+
+</div>
+
+
+<div>
+
+<strong>
+04
+</strong>
+
+<span>
+Educación ambiental
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="planet">
+
+<div class="planet-circle">
+🌎
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DESAFÍOS
+===================================================== -->
+
+<section class="limitations reveal">
+
+
+<div class="section-label">
+06 — DESAFÍOS
+</div>
+
+
+<h2>
+
+La tecnología también
+<br>
+tiene retos.
+
+</h2>
+
+
+
+<div class="challenge-grid">
+
+
+<div>
+
+<span>
+01
+</span>
+
+<h3>
+Superficie solar
+</h3>
+
+<p>
+
+Un automóvil dispone de una
+superficie limitada para instalar
+paneles.
+
+</p>
+
+</div>
+
+
+
+<div>
+
+<span>
+02
+</span>
+
+<h3>
+Condiciones climáticas
+</h3>
+
+<p>
+
+La generación eléctrica depende
+de la radiación solar disponible.
+
+</p>
+
+</div>
+
+
+
+<div>
+
+<span>
+03
+</span>
+
+<h3>
+Baterías
+</h3>
+
+<p>
+
+El almacenamiento es fundamental
+para disponer de energía cuando
+no hay suficiente luz.
+
+</p>
+
+</div>
+
+
+
+<div>
+
+<span>
+04
+</span>
+
+<h3>
+Eficiencia
+</h3>
+
+<p>
+
+El vehículo debe equilibrar peso,
+aerodinámica, consumo y generación.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FUTURO
+===================================================== -->
+
+<section
+id="futuro"
+class="future reveal"
+>
+
+
+<div>
+
+<div class="section-label">
+07 — EL FUTURO
+</div>
+
+
+<h2>
+
+Imagina lo que
+<br>
+podemos construir.
+
+</h2>
+
+
+<p>
+
+Los avances en paneles solares,
+baterías, motores eléctricos,
+materiales y sistemas inteligentes
+pueden abrir nuevas posibilidades
+para la movilidad sostenible.
+
+</p>
+
+
+<a
+href="#inicio"
+class="btn primary"
+>
+
+Volver al inicio ↑
+
+</a>
+
+</div>
+
+
+<div class="future-number">
+2030+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer-logo">
+☀ SolarDrive
+</div>
+
+
+<p>
+
+Proyecto educativo —
+Carro con funcionamiento solar
+
+</p>
+
+
+<div class="footer-line">
+</div>
+
+
+<small>
+
+ENERGÍA SOLAR • INNOVACIÓN • MOVILIDAD SOSTENIBLE
+
+</small>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   TEMA OSCURO / CLARO
+===================================================== */
+
+const themeBtn =
+document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click",()=>{
+
+document.body.classList.toggle("light");
+
+themeBtn.textContent =
+document.body.classList.contains("light")
+? "☀"
+: "☾";
+
+});
+
+
+
+/* =====================================================
+   ANIMACIONES DE SCROLL
+===================================================== */
+
+const elements =
+document.querySelectorAll(".reveal");
+
+
+const observer =
+new IntersectionObserver(
+
+(entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("active");
+
+}
+
+});
+
+},
+
+{
+threshold:.15
+}
+
+);
+
+
+elements.forEach(element=>{
+
+observer.observe(element);
+
+});
+
+
+
+/* =====================================================
+   SIMULADOR
+===================================================== */
+
+const button =
+document.getElementById(
+"startSimulation"
+);
+
+const progress =
+document.getElementById(
+"energyProgress"
+);
+
+const text =
+document.getElementById(
+"simulationText"
+);
+
+
+button.addEventListener(
+"click",
+()=>{
+
+button.disabled=true;
+
+button.textContent=
+"⚡ Generando energía...";
+
+
+progress.style.width="100%";
+
+
+text.textContent=
+"☀️ El panel está captando energía solar...";
+
+
+setTimeout(()=>{
+
+text.textContent=
+"⚡ La electricidad está siendo convertida...";
+
+},1000);
+
+
+setTimeout(()=>{
+
+text.textContent=
+"🔋 La batería está almacenando energía...";
+
+},2000);
+
+
+setTimeout(()=>{
+
+text.textContent=
+"⚙️ La energía llega al motor eléctrico...";
+
+},3000);
+
+
+setTimeout(()=>{
+
+text.textContent=
+"🚗 ¡El vehículo está listo para moverse!";
+
+button.disabled=false;
+
+button.textContent=
+"↻ Reiniciar simulación";
+
+},4000);
+
+
+setTimeout(()=>{
+
+progress.style.width="0%";
+
+},5000);
+
+});
+
+
+
+/* =====================================================
+   PARALLAX DEL HERO
+===================================================== */
+
+const heroImage =
+document.querySelector(
+".hero-image"
+);
+
+
+window.addEventListener(
+"scroll",
+()=>{
+
+if(window.innerWidth>900){
+
+heroImage.style.transform =
+`translateY(${window.scrollY*.035}px)`;
+
+}
+
+});
+
+</script>
+
+
+</body>
+</html>
